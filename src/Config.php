@@ -4,7 +4,7 @@ namespace App;
 
 class Config {
 	
-	// Bitcoin Node Manager (BNM) password for login. You should additionally change the name of 
+	// Bitcore Node Manager (BNM) password for login. You should additionally change the name of 
     // BNM folder to something unique, if accessible via the web. You can also limit the access 
     // to a specific IP with the option below.
 	const PASSWORD = "LOGIN-PASSWORD";
@@ -14,11 +14,11 @@ class Config {
 	const ACCESS_IP = "localhost";	
 	
 	
-	// IP of bitcoind RPC server. Usually localhost. Be careful with remote servers. The connection is not encrypted.
+	// IP of bitcored RPC server. Usually localhost. Be careful with remote servers. The connection is not encrypted.
 	const RPC_IP = "127.0.0.1:8332";
-	// RPC username / rpcauth specified in bitcoin.conf
+	// RPC username / rpcauth specified in bitcore.conf
 	const RPC_USER = "USERNAME";
-	// RPC password / rpcauth specified in bitcoin.conf
+	// RPC password / rpcauth specified in bitcore.conf
 	const RPC_PASSWORD = "PASSWORD";
 	
 	

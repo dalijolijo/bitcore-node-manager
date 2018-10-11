@@ -19,7 +19,7 @@
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 					  <span class="count_top"><i class="fa fa-btc" style="color:orange;"></i> Total Fees</span>
-					  <div class="count"><?= $content["totalFees"] ?> <small>BTC</small></div>
+					  <div class="count"><?= $content["totalFees"] ?> <small>BTX</small></div>
 					  <span class="count_bottom"><span class="orange" ><?= $content["avgFee"] ?></span> avg. fees per block</span>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -99,9 +99,8 @@
 													<span class="sr-only">Toggle Dropdown</span>
 											</button>
 											<ul class="dropdown-menu">
-												<li><a href="https://blockchain.com/btc/block/<?= $block["hash"] ?>" target="_blank"><i class="fa fa-globe fa-lg" style="color:lightblue"></i> Blockchain.com</a></li>
-												<li><a href="https://live.blockcypher.com/btc/block/<?= $block["hash"] ?>" target="_blank"><i class="fa fa-globe fa-lg" style="color:lightblue"></i> BlockCypher</a></li>
-												<li><a href="https://www.smartbit.com.au/block/<?= $block["hash"] ?>" target="_blank"><i class="fa fa-globe fa-lg" style="color:lightblue"></i> Smartbit</a></li>
+												<li><a href="https://insight.bitcore.cc/block/<?= $block["hash"] ?>" target="_blank"><i class="fa fa-globe fa-lg" style="color:lightblue"></i> Bitcore Insight</a></li>
+												<li><a href="https://explorer.btx.zeltrez.io/block/<?= $block["hash"] ?>" target="_blank"><i class="fa fa-globe fa-lg" style="color:lightblue"></i> Bitcore Insight by ZelCore</a></li>
 											   </ul>
 											</div>										   
 								   </td>										   

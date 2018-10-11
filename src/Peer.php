@@ -10,7 +10,7 @@ class Peer{
 	public $services; // string
 	public $servicesOriginal; // string
 	public $relayTx; // bool
-	public $feeFilter; // int (BTC)
+	public $feeFilter; // int (BTX)
 	public $lastSend;  // int (seconds)
 	public $lastReceived;  // int (seconds)
 	public $trafficOut; // int (MB)
