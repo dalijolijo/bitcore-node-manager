@@ -7,19 +7,18 @@ class Config {
 	// Bitcore Node Manager (BNM) password for login. You should additionally change the name of 
     // BNM folder to something unique, if accessible via the web. You can also limit the access 
     // to a specific IP with the option below.
-	const PASSWORD = "LOGIN-PASSWORD";
+	const PASSWORD = "btx";
     // IP that can can access BNM (by default only localhost (IPv4/v6) can access BNM).
     // If empty (""), any IP can access BNM. If "localhost", only localhost can access BNM. 
     // If specific IP (e.g. "84.12.32.297"), localhost and the specific IP can access BNM.
-	const ACCESS_IP = "localhost";	
-	
+	const ACCESS_IP = "172.17.0.1";	
 	
 	// IP of bitcored RPC server. Usually localhost. Be careful with remote servers. The connection is not encrypted.
-	const RPC_IP = "127.0.0.1:8332";
+	const RPC_IP = "127.0.0.1:8556";
 	// RPC username / rpcauth specified in bitcore.conf
-	const RPC_USER = "USERNAME";
+	const RPC_USER = "bitcore";
 	// RPC password / rpcauth specified in bitcore.conf
-	const RPC_PASSWORD = "PASSWORD";
+	const RPC_PASSWORD = "local321";
 	
 	
 	// Use ip-api.com to get country, city and isp of peers. API is limited to 150 requests per minutes.
