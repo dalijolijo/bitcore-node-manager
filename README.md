@@ -1,7 +1,8 @@
 # BitCore Node Manager - Beta
 
-BitCore Node Manager (BTX-NM) is a lightweight dashboard and control system for your BitCore (BTX) node.
+BitCore Node Manager is a lightweight dashboard and control system for your BitCore RPC Server Node.
 
+![BitCore Node Manager](bitcore-node-manager.png?raw=true "BitCore Node Manager")
 
 ## Features
 
@@ -21,6 +22,9 @@ BitCore Node Manager (BTX-NM) is a lightweight dashboard and control system for 
 * Overview of the last received forks (orphaned blocks / alternative chains)
 * Overview of the memory pool and containing transactions
 
+## Docker Solution
+You will find BitCore Node Manager as docker solution [here](https://github.com/dalijolijo/bitcore-node-manager/blob/master/docker/README.md).
+
 ## Requirements
 
 * BitCore Core 0.14.0+
@@ -30,9 +34,9 @@ BitCore Node Manager (BTX-NM) is a lightweight dashboard and control system for 
 
 ## Installation
 
-1. Download BitCore Node Manager either from [here](https://github.com/dalijolijo/bitcoin-node-manager/releases) or by cloning this the repository.
+1. Install BitCore Node Manager by cloning this repository or run [BitCore Node Manager as Docker Solution](https://github.com/dalijolijo/bitcore-node-manager/blob/master/docker/README.md).
 2. Edit `src/Config.php` to enter your bitcoind RPC creditials, set a password and change other settings.
-3. Upload the folder to the public directory of your web server. If the folder is accesible via the internet, I recommed renaming the folder to something unique. Although BTX-NM is password protected and access can be limited to a specific IP, there can be security flaws and bugs.
+3. Upload the folder to the public directory of your web server. If the folder is accesible via the internet, I recommed renaming the folder to something unique. Although BitCore Node Manager is password protected and access can be limited to a specific IP, there can be security flaws and bugs.
 4. Open the URL to the folder in your browser and login with the password choosen in `src/Config.php`.
 5. Optional: Run `chmod -R 770 /path-to-folder/{data, src, views}`. Only necessary for non Apache (`AllowOverride All` necessary) and publicly accessible web server. For more information, read next section.
 
