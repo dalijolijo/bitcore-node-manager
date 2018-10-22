@@ -18,7 +18,7 @@ if(!(empty(Config::ACCESS_IP) OR $_SERVER['REMOTE_ADDR'] == "127.0.0.1" OR $_SER
 // Cronjob Rule Run
 if(isset($_GET['job']) AND $_GET['job'] === substr(hash('sha256', Config::PASSWORD."ebe8d532"),0,24)){
 	require_once 'src/Utility.php';
-	$bitcored = new jsonRPCClient('http://'.Config::RPC_USER.':'.Config::RPC_PASSWORD.'@'.Config::RPC_IP.'/');
+	$bitcloudd = new jsonRPCClient('http://'.Config::RPC_USER.':'.Config::RPC_PASSWORD.'@'.Config::RPC_IP.'/');
 	Rule::run();
 	exit;
 }
@@ -65,7 +65,7 @@ $trafficC = 0;
 $trafficCIn = 0;
 $trafficCOut = 0;
 $newPeersCount = 0;
-$bitcored = new jsonRPCClient('http://'.Config::RPC_USER.':'.Config::RPC_PASSWORD.'@'.Config::RPC_IP.'/');
+$bitcloudd = new jsonRPCClient('http://'.Config::RPC_USER.':'.Config::RPC_PASSWORD.'@'.Config::RPC_IP.'/');
 
 // Content
 // Main Page
@@ -97,8 +97,8 @@ if(empty($_GET) OR $_GET['p'] == "main") {
 			}
 			if($err == 0){
 				try {
-					$result = $bitcored->setban($ip, "add", $bantime);
-					// Sleep necessary otherwise peer is still returned by bitcore core
+					$result = $bitcloudd->setban($ip, "add", $bantime);
+					// Sleep necessary otherwise peer is still returned by bitcloud core
 					sleep(1);
 					$message = "Peer successfully banned";
 				} catch (\Exception $e) {
@@ -113,8 +113,8 @@ if(empty($_GET) OR $_GET['p'] == "main") {
 			if(preg_match("/^(\[{0,1}[0-9a-z:\.]{7,39}\]{0,1}:[0-9]{1,5})$/", $_GET['ip'], $match)) {
 				$ip = $match[1];
 				try {
-					$result = $bitcored->disconnectnode($ip);
-					// Sleep necessary otherwise peer is still returned by bitcore core
+					$result = $bitcloudd->disconnectnode($ip);
+					// Sleep necessary otherwise peer is still returned by bitcloud core
 					sleep(1);
 					$message = "Peer successfully disconnected";
 				} catch (\Exception $e) {
@@ -205,7 +205,7 @@ if(empty($_GET) OR $_GET['p'] == "main") {
 			if(preg_match("/^([0-9a-z:\.]{7,39}\/[0-9]{1,3})$/", $_GET['ip'], $match)) {
 				$ip = $match[1];
 				try {
-					$result = $bitcored->setban($ip, "remove");
+					$result = $bitcloudd->setban($ip, "remove");
 					$message = "Node successfully unbanned";
 				} catch (\Exception $e) {
 					$error = "Node could not be unbanned";
@@ -215,7 +215,7 @@ if(empty($_GET) OR $_GET['p'] == "main") {
 			}
 		}elseif($_GET['c'] == "clearlist"){
 			try {
-				$result = $bitcored->clearbanned();
+				$result = $bitcloudd->clearbanned();
 				$message = "Banlist cleared";
 			} catch (\Exception $e) {
 				$error = "Could not clear banlist";
@@ -229,7 +229,7 @@ if(empty($_GET) OR $_GET['p'] == "main") {
 				foreach($banlist as $ban){
 					$timestamp = strtotime($ban[2]);
 					if(checkIpBanList($ban[0]) AND $timestamp !== FALSE){
-						$result = $bitcored->setban($ban[0], "add", $timestamp, true);
+						$result = $bitcloudd->setban($ban[0], "add", $timestamp, true);
 						$i++;
 					}
 				}

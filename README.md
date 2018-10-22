@@ -1,8 +1,8 @@
-# BitCore Node Manager - Beta
+# Bitcloud Node Manager - Beta
 
-BitCore Node Manager is a lightweight dashboard and control system for your BitCore RPC Server Node.
+Bitcloud Node Manager is a lightweight dashboard and control system for your Bitcloud RPC Server Node.
 
-![BitCore Node Manager](bitcore-node-manager.png?raw=true "BitCore Node Manager")
+![Bitcloud Node Manager](bitcore-node-manager.png?raw=true "Bitcloud Node Manager")
 
 ## Features
 
@@ -23,20 +23,20 @@ BitCore Node Manager is a lightweight dashboard and control system for your BitC
 * Overview of the memory pool and containing transactions
 
 ## Docker Solution
-You will find BitCore Node Manager as docker solution [here](https://github.com/dalijolijo/bitcore-node-manager/blob/master/docker/README.md).
+You will find Bitcloud Node Manager as docker solution [here](https://github.com/dalijolijo/bitcore-node-manager/blob/master/docker/README.md).
 
 ## Requirements
 
-* BitCore Core 0.14.0+
+* Bitcloud Core 0.14.0+
 * Web server (e.g. Apache, PHP built-in web server)
 * PHP 7.0.0+
     * cURL
 
 ## Installation
 
-1. Install BitCore Node Manager by cloning this repository or run [BitCore Node Manager as Docker Solution](https://github.com/dalijolijo/bitcore-node-manager/blob/master/docker/README.md).
+1. Install Bitcloud Node Manager by cloning this repository or run [Bitcloud Node Manager as Docker Solution](https://github.com/dalijolijo/bitcore-node-manager/blob/master/docker/README.md).
 2. Edit `src/Config.php` to enter your bitcoind RPC creditials, set a password and change other settings.
-3. Upload the folder to the public directory of your web server. If the folder is accesible via the internet, I recommed renaming the folder to something unique. Although BitCore Node Manager is password protected and access can be limited to a specific IP, there can be security flaws and bugs.
+3. Upload the folder to the public directory of your web server. If the folder is accesible via the internet, I recommed renaming the folder to something unique. Although Bitcloud Node Manager is password protected and access can be limited to a specific IP, there can be security flaws and bugs.
 4. Open the URL to the folder in your browser and login with the password choosen in `src/Config.php`.
 5. Optional: Run `chmod -R 770 /path-to-folder/{data, src, views}`. Only necessary for non Apache (`AllowOverride All` necessary) and publicly accessible web server. For more information, read next section.
 

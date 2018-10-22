@@ -282,8 +282,8 @@ function getCleanClient($client){
 		$client = "MultiBit HD ".$matches[1];
 	}elseif(preg_match("/MultiBit:([0-9]\.[0-9]{1,2}\.[0-9]{1,2})/i",$client, $matches)){
 		$client = "MultiBit ".$matches[1];
-	}elseif(preg_match("/Bitcore Wallet:([0-9]\.[0-9]{1,2})/i",$client, $matches)){
-		$client = "Bitcore Wallet ".$matches[1];
+	}elseif(preg_match("/Bitcloud Wallet:([0-9]\.[0-9]{1,2})/i",$client, $matches)){
+		$client = "Bitcloud Wallet ".$matches[1];
 	}else{
 		$replace = array(":", "-SNAPSHOT", "\"", "'", "<", ">", "=");
 		$client = str_replace($replace, " ", $client);
@@ -292,7 +292,7 @@ function getCleanClient($client){
 }
 
 function checkSPV($client){	
-	if (preg_match('/MultiBit|bitcorej|bread Wallet/i',$client)){
+	if (preg_match('/MultiBit|bitcloudj|bread Wallet/i',$client)){
 		return true;
 	}else{
 		return false;
@@ -415,14 +415,14 @@ function getMostPop($peers){
 // Peer functions
 
 function getPeerData(bool $geo = NULL){
-	global $bitcored;
+	global $bitcloudd;
 	
 	// If not set, use config setting
 	if(is_null($geo)){
 		$geo = CONFIG::PEERS_GEO;
 	}
 	
-	$peerInfo = $bitcored->getpeerinfo(); 
+	$peerInfo = $bitcloudd->getpeerinfo(); 
 
 	if($geo){
 		$peers = createPeersGeo($peerInfo);
@@ -468,7 +468,7 @@ function createPeersGeo($peerinfo){
 		foreach($arrayPeers as $key => $peer){
 			if($oldestPeerIp == $peer[0]){
 				$delete = true;
-				// Either bitcored was restarted or peer reconnected. Since peer is the oldest, all other peers we known disconnected
+				// Either bitcloudd was restarted or peer reconnected. Since peer is the oldest, all other peers we known disconnected
 				if($oldestPeerId != $key){
 					$delete = false;
 				}

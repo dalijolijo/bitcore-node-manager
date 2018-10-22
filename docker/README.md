@@ -1,4 +1,4 @@
-# BitCore Node Manager as Docker Solution
+# Bitcloud Node Manager as Docker Solution
 [![docker pulls](https://img.shields.io/docker/pulls/dalijolijo/bitcore-node-manager.svg?style=flat)](https://hub.docker.com/r/dalijolijo/bitcore-node-manager/)
 
 ## Deploy as a docker container
@@ -29,13 +29,13 @@ sudo curl -sSL https://get.docker.com | sh
 Login as root, then do:
 
 ```sh
-sudo bash -c "$(curl -fsSL https://github.com/dalijolijo/bitcore-node-manager/raw/master/docker/btx-node-manager-docker.sh)"
+sudo bash -c "$(curl -fsSL https://github.com/dalijolijo/bitcore-node-manager/raw/master/docker/btdx-node-manager-docker.sh)"
 ```
 
-## BitCore Node Manager 
-The integrated BitCore RPC Server will download the blockchain bootstrap and will synced to the current block height.
+## Bitcloud Node Manager 
+The integrated Bitcloud RPC Server will download the blockchain bootstrap and will synced to the current block height.
 
-Now view your BitCore Node Manager: http://localhost/btx
+Now view your Bitcloud Node Manager: http://localhost/btdx
 
-**Hint:** If the BitCore Node Manager docker container is running on a server you must establish a tunnel for port 80 to use localhost.
+**Hint:** If the Bitcloud Node Manager docker container is running on a server you must establish a tunnel for port 80 to use localhost.
 ![Putty Tunneling](/docker/putty-tunneling.png?raw=true "Putty Tunneling")

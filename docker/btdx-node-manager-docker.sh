@@ -5,16 +5,12 @@ GIT_REPO="dalijolijo"
 GIT_PROJECT="bitcore-node-manager"
 DOCKER_REPO="dalijolijo"
 IMAGE_NAME="bitcore-node-manager"
-IMAGE_TAG="0.15.2.0.0" #BTX Version 0.15.2.0.0
-CONFIG_PATH="/root/.bitcore"
-CONFIG=${CONFIG_PATH}/bitcore.conf
+IMAGE_TAG="btdx" 
+CONFIG_PATH="/root/.bitcloud"
+CONFIG=${CONFIG_PATH}/bitcloud.conf
 CONTAINER_NAME="bitcore-node-manager"
-DEFAULT_PORT="8555"
-RPC_PORT="8556"
-TOR_PORT="9051"
+RPC_PORT="8330"
 BNM_PORT="80"
-WEB="bitcore.cc" # without "https://" and without the last "/" (only HTTPS accepted)
-BOOTSTRAP="bootstrap.tar.gz"
 
 #
 # Color definitions
@@ -22,13 +18,13 @@ BOOTSTRAP="bootstrap.tar.gz"
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NO_COL='\033[0m'
-BTX_COL='\033[1;35m'
+BTDX_COL='\033[0;36m'
 
 #
 # Check if bitcore.conf already exist.
 #
 clear
-printf "\nDOCKER SETUP FOR ${BTX_COL}BITCORE NODE MANAGER (BTX v.${IMAGE_TAG})${NO_COL}\n"
+printf "\nDOCKER SETUP FOR ${BTDX_COL}BITCLOUD NODE MANAGER (BTDX v.${IMAGE_TAG})${NO_COL}\n"
 printf "\nSetup Config file"
 printf "\n-----------------\n"
 
@@ -50,7 +46,7 @@ chmod +x ./check_os.sh
 source ./check_os.sh
 wget https://raw.githubusercontent.com/${GIT_REPO}/${GIT_PROJECT}/master/docker/firewall_config.sh -O firewall_config.sh
 chmod +x ./firewall_config.sh
-source ./firewall_config.sh ${DEFAULT_PORT} ${RPC_PORT} ${TOR_PORT} ${BNM_PORT} 
+source ./firewall_config.sh ${RPC_PORT} ${BNM_PORT} 
 
 #
 # Pull docker images and run the docker container
@@ -69,7 +65,7 @@ if [ $? -eq 0 ];then
     else
 	printf "\nDocker Setup Result"
         printf "\n----------------------\n"
-        printf "${RED}Canceled the Docker Setup without starting BitCore Node Manager Docker Container.${NO_COL}\n\n"
+        printf "${RED}Canceled the Docker Setup without starting Bitcloud Node Manager Docker Container.${NO_COL}\n\n"
 	exit 1
     fi
 fi
@@ -77,13 +73,9 @@ fi
 docker rm ${CONTAINER_NAME} >/dev/null
 docker pull ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
 docker run --rm \
- -p ${DEFAULT_PORT}:${DEFAULT_PORT} \
  -p ${RPC_PORT}:${RPC_PORT} \
- -p ${TOR_PORT}:${TOR_PORT} \
  -p ${BNM_PORT}:${BNM_PORT} \
  --name ${CONTAINER_NAME} \
- -e WEB="${WEB}" \
- -e BOOTSTRAP="${BOOTSTRAP}" \
  -e CONFIG_PATH=${CONFIG_PATH} \
  -d ${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
 
@@ -99,10 +91,10 @@ sudo docker ps | grep ${CONTAINER_NAME} >/dev/null
 if [ $? -ne 0 ];then
     printf "${RED}Sorry! Something went wrong. :(${NO_COL}\n"
 else
-    printf "${GREEN}GREAT! Your ${BTX_COL}BitCore Node Manager${GREEN} Docker Container is running now! :)${NO_COL}\n"
+    printf "${GREEN}GREAT! Your ${BTDX_COL}Bitcloud Node Manager${GREEN} Docker Container is running now! :)${NO_COL}\n"
     printf "\nShow your running docker container \'${CONTAINER_NAME}\' with ${GREEN}'docker ps'${NO_COL}\n"
     sudo docker ps | grep ${CONTAINER_NAME}
-    printf "\nJump inside the ${BTX_COL}BitCore Node Manager${NO_COL} Docker Container with ${GREEN}'docker exec -it ${CONTAINER_NAME} bash'${NO_COL}\n"
-    printf "\nCheck Log Output of ${BTX_COL}BitCore Node Manager${NO_COL} with ${GREEN}'docker logs ${CONTAINER_NAME}'${NO_COL}\n"
+    printf "\nJump inside the ${BTDX_COL}Bitcloud Node Manager${NO_COL} Docker Container with ${GREEN}'docker exec -it ${CONTAINER_NAME} bash'${NO_COL}\n"
+    printf "\nCheck Log Output of ${BTDX_COL}Bitcloud Node Manager${NO_COL} with ${GREEN}'docker logs ${CONTAINER_NAME}'${NO_COL}\n"
     printf "${GREEN}HAVE FUN!${NO_COL}\n\n"
 fi

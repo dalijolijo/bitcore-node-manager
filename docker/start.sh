@@ -2,24 +2,21 @@
 set -u
 
 #
-# Downloading bootstrap file
+# Set user/password for Node Manager 
 #
-printf "** Downloading bootstrap file ***\n"
-cd /root/.bitcore/
-if [ ! -d ${CONFIG_PATH}/blocks ] && [ "$(curl -Is https://${WEB}/${BOOTSTRAP} | head -n 1 | tr -d '\r\n')" = "HTTP/1.1 200 OK" ] ; then \
-        wget https://${WEB}/${BOOTSTRAP}; \
-        tar -xvzf ${BOOTSTRAP};
-fi
+sed -i "s/RPCUSER/ /g" /var/www/html/btdx/src/Config.php
+sed -i "s/RPCPASSWORD/ /g" /var/www/html/btdx/src/Config.php
+
 
 #
 # Start apache2
 #
-sed -i "s/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/btx/g" /etc/apache2/sites-available/000-default.conf
+sed -i "s/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/btdx/g" /etc/apache2/sites-available/000-default.conf
 service apache2 restart
 
 #
-# Starting BitCore Service
+# Starting Bitcloud Service
 #
 # Hint: docker not supported systemd, use of supervisord
-printf "*** Starting BitCore Service ***\n"
+printf "*** Starting Bitcloud Service ***\n"
 exec /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf

@@ -30,10 +30,10 @@ function createMainContent(){
 }
 
 function createPeerContent(){
-	global $trafficC, $trafficCIn, $trafficCOut, $bitcored, $newPeersCount;
+	global $trafficC, $trafficCIn, $trafficCOut, $bitcloudd, $newPeersCount;
 
 	$peers = getPeerData();
-	$netinfo = $bitcored->getnettotals();
+	$netinfo = $bitcloudd->getnettotals();
 
 	$content = getMostPop($peers);
 	$content['peers'] = $peers;
@@ -51,9 +51,9 @@ function createPeerContent(){
 }
 
 function createBanListContent(){
-	global $bitcored, $error;
+	global $bitcloudd, $error;
 
-	$banlist = $bitcored->listbanned();
+	$banlist = $bitcloudd->listbanned();
 
 	$content = [];
 	$lastCount = 0;
@@ -128,7 +128,7 @@ function createBanListContent(){
 }
 
 function createBlocksContent(){
-	global $bitcored;
+	global $bitcloudd;
 
 	$content = [];
 	$content["totalTx"] = 0;
@@ -136,10 +136,10 @@ function createBlocksContent(){
 	$content["totalSize"] = 0;
 	$content["segwitCount"] = 0;
 
-	$blockHash = $bitcored->getbestblockhash();
+	$blockHash = $bitcloudd->getbestblockhash();
 
 	for($i = 0; $i < Config::DISPLAY_BLOCKS; $i++){
-		$block = $bitcored->getblock($blockHash);
+		$block = $bitcloudd->getblock($blockHash);
 		$content["blocks"][$block["height"]]["hash"] = $block["hash"];
 		$content["blocks"][$block["height"]]["size"] = round($block["size"]/1000,2);
 		$content["totalSize"] += $block["size"];
@@ -149,7 +149,7 @@ function createBlocksContent(){
 		$content["blocks"][$block["height"]]["mediantime"] = getDateTime($block["mediantime"]);
 		$content["blocks"][$block["height"]]["timeago"] = round((time() - $block["time"])/60);
 		$content["blocks"][$block["height"]]["coinbasetx"] = $block["tx"][0];
-		$coinbaseTx = $bitcored->getrawtransaction($block["tx"][0], 1);
+		$coinbaseTx = $bitcloudd->getrawtransaction($block["tx"][0], 1);
 		if($coinbaseTx["vout"][0]["value"] != 0){
 			$content["blocks"][$block["height"]]["fees"] = round($coinbaseTx["vout"][0]["value"] - 12.5, 4);
 		}else{
@@ -172,13 +172,13 @@ function createBlocksContent(){
 }
 
 function createForksContent(){
-	global $bitcored;
+	global $bitcloudd;
 
 	// Count forks in last 24h
 	$timeAgo = time()-86400;
 	$content["recentForks"] = 0;
 
-	$forks = $bitcored->getchaintips();
+	$forks = $bitcloudd->getchaintips();
 	$i = 0;
 	$lastTime = 0;
 
@@ -194,7 +194,7 @@ function createForksContent(){
 		$content["blocks"][$i]["succeeded"] = $fork["height"];
 
 		if($fork["status"] != "headers-only" AND $fork["status"] != "unknown"){
-			$block = $bitcored->getblock($fork["hash"]);
+			$block = $bitcloudd->getblock($fork["hash"]);
 			$content["blocks"][$i]["size"] = round($block["size"]/1000,2);
 			$content["blocks"][$i]["versionhex"] = $block["versionHex"];
 			$content["blocks"][$i]["voting"] = getVoting($block["versionHex"]);
@@ -250,9 +250,9 @@ function createRulesContent($editID = NULL){
 }
 
 function createMempoolContent(){
-	global $bitcored;
+	global $bitcloudd;
 
-	$content['txs'] = $bitcored->getrawmempool(TRUE);
+	$content['txs'] = $bitcloudd->getrawmempool(TRUE);
 	$content['txs'] = array_slice($content['txs'], 0, CONFIG::DISPLAY_TXS);
 	$content['node'] = new Node();
 
@@ -260,10 +260,10 @@ function createMempoolContent(){
 }
 
 function createUnspentContent(){
-	global $bitcored, $error;
+	global $bitcloudd, $error;
 	
 	try{
-		$unspents = $bitcored->listunspent();
+		$unspents = $bitcloudd->listunspent();
 	}catch(\Exception $e){
 		$error = "Wallet disabled!";
 		return "";

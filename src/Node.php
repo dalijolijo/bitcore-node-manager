@@ -50,12 +50,12 @@ class Node {
 	
 	
 	function __construct() {
-		global $bitcored;
-		$networkInfo = $bitcored->getnetworkinfo();
-		$mempoolInfo = $bitcored->getmempoolinfo();
-		$blockchainInfo = $bitcored->getblockchaininfo();
-		$miningInfo = $bitcored->getmininginfo();
-		$tInfo = $bitcored->getnettotals();
+		global $bitcloudd;
+		$networkInfo = $bitcloudd->getnetworkinfo();
+		$mempoolInfo = $bitcloudd->getmempoolinfo();
+		$blockchainInfo = $bitcloudd->getblockchaininfo();
+		$miningInfo = $bitcloudd->getmininginfo();
+		$tInfo = $bitcloudd->getnettotals();
 		
 		$this->blockHeight = checkInt($blockchainInfo["blocks"]);
 		$this->pruMode = checkBool($blockchainInfo["pruned"]);
@@ -104,7 +104,7 @@ class Node {
 		$this->bHeight = checkInt($blockchainInfo["blocks"]);
 		$this->hHeight = checkInt($blockchainInfo["headers"]);
 		
-		$blockInfo = $bitcored->getblock($blockchainInfo["bestblockhash"]);
+		$blockInfo = $bitcloudd->getblock($blockchainInfo["bestblockhash"]);
 		$this->bHeightAgo = round((time()-checkInt($blockInfo["time"]))/60,1);
 		
 		$this->diff = checkInt($blockchainInfo["difficulty"]);
@@ -114,7 +114,7 @@ class Node {
 		$this->softForks = checkSoftFork($blockchainInfo["bip9_softforks"]);	
 		// Wallet Function
 		try{
-			$walletInfo = $bitcored->getwalletinfo();
+			$walletInfo = $bitcloudd->getwalletinfo();
 			$this->walVer = checkInt($walletInfo["walletversion"]);	
 			$this->walBal = checkInt($walletInfo["balance"]);	
 			$this->waluBal = checkInt($walletInfo["unconfirmed_balance"]);	
